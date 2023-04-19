@@ -1,9 +1,28 @@
 Table of contents:
 
+* [AZD team requirements](#azd-team-requirements)
 * [GitHub project settings](#github-project)
 * [Testing](#testing)
 * [Security](#security)
 * [Package-specific recommendations](#package-specific)
+
+# AZD team requirements
+
+## Infra folder
+
+- [ ] Bicep files should be formatted with `bicep format`. Can be automated with [pre-commit](https://github.com/Azure4DevOps/check-azure-bicep).
+- [ ] Resources should include a dashboard so that `azd monitor` works, either by referencing the `monitoring.bicep` module or creating a dashboard separately. See [main.bicep](https://github.com/pamelafox/staticmaps-function/blob/ae6fa56af04787df13c124f3500ba143b418e4de/infra/main.bicep#L24)
+- [ ] Application code should include either OpenCensus or OpenTelemetry so that the monitor is populated. See [todo/app.py](https://github.com/Azure/azure-dev/blob/cb28058af1e7139be4381532f6b1167d9cd948fb/templates/todo/api/python/todo/app.py#L48).
+- [ ] `main.bicep` should reference modules from `core`, copied from [azure-dev](https://github.com/Azure/azure-dev/tree/main/templates/common/infra/bicep).
+- [ ] ACA samples need an additional `service_name.bicep` and `service_name.parameters.json` for each containerapp deployed. See [api.bicep](https://github.com/pamelafox/flask-charts-api-container-app/blob/main/infra/api.bicep)
+
+## Elsewhere
+
+- [ ] `azure.yaml` should include metadata for telemetry. See [azure.yaml](https://github.com/pamelafox/flask-charts-api-container-app/blob/main/azure.yaml)
+- [ ] `.github/workflows` should include [`azure-dev.yaml`](https://github.com/Azure/azure-dev/blob/main/templates/common/.github/workflows/bicep/azure-dev.yml) to support `azd pipeline config`.
+- [ ] .devcontainer should contain a devcontainer.json and Dockerfile/docker-compose.yaml in order to create a full local dev environment. Start with [azure-dev versions](https://github.com/Azure/azure-dev/tree/cb28058af1e7139be4381532f6b1167d9cd948fb/templates/common/.devcontainer) and modify as needed.
+- [ ] Include architecture diagram in README.md
+- [ ] If using "Open in Codespaces" buttons, use same as TODO samples. See [README.md](https://github.com/Azure/azure-dev/blob/main/templates/todo/projects/python-mongo-swa-func/README.md)
 
 # GitHub project settings
 
