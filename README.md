@@ -10,7 +10,7 @@ Table of contents:
 
 ## Infra folder
 
-- [ ] Bicep files should be formatted with `bicep format`. Can be automated with [pre-commit](https://github.com/Azure4DevOps/check-azure-bicep).
+- [ ] Bicep files should be formatted with `bicep format`. Can possibly be automated with [pre-commit](https://github.com/Azure4DevOps/check-azure-bicep) or [GitHub actions](https://github.com/pamelafox/django-quiz-app/pull/15/files#diff-8af3e80c405f1ab691b04ee13deecae46a34d6e87cc81b9a5f21490bc17e2609R29).
 - [ ] Resources should include a dashboard so that `azd monitor` works, either by referencing the `monitoring.bicep` module or creating a dashboard separately. See [main.bicep](https://github.com/pamelafox/staticmaps-function/blob/ae6fa56af04787df13c124f3500ba143b418e4de/infra/main.bicep#L24)
 - [ ] Application code should include either OpenCensus or OpenTelemetry so that the monitor is populated. See [todo/app.py](https://github.com/Azure/azure-dev/blob/cb28058af1e7139be4381532f6b1167d9cd948fb/templates/todo/api/python/todo/app.py#L48).
 - [ ] `main.bicep` should reference modules from `core`, copied from [azure-dev](https://github.com/Azure/azure-dev/tree/main/templates/common/infra/bicep).
