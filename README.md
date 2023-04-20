@@ -19,10 +19,11 @@ Table of contents:
 ## Elsewhere
 
 - [ ] `azure.yaml` should include metadata for telemetry. See [azure.yaml](https://github.com/pamelafox/flask-charts-api-container-app/blob/main/azure.yaml)
+- [ ] In `azure.yaml`, the `project` property for each service should point at a subfolder, not at root (`.`). Typically the subfolder is labeled `src` but that may vary. See [azure.yaml](https://github.com/pamelafox/flask-gallery-container-app/blob/eaf27456a1a67729c0e72ec18e42e4ac3600f9c3/azure.yaml#L8)
 - [ ] `.github/workflows` should include [`azure-dev.yaml`](https://github.com/Azure/azure-dev/blob/main/templates/common/.github/workflows/bicep/azure-dev.yml) to support `azd pipeline config`.
-- [ ] .devcontainer should contain a devcontainer.json and Dockerfile/docker-compose.yaml in order to create a full local dev environment. Start with [azure-dev versions](https://github.com/Azure/azure-dev/tree/cb28058af1e7139be4381532f6b1167d9cd948fb/templates/common/.devcontainer) and modify as needed.
-- [ ] Include architecture diagram in README.md
-- [ ] If using "Open in Codespaces" buttons, use same as TODO samples. See [README.md](https://github.com/Azure/azure-dev/blob/main/templates/todo/projects/python-mongo-swa-func/README.md)
+- [ ] `.devcontainer` should contain a `devcontainer.json` and `Dockerfile`/`docker-compose.yaml` in order to create a full local dev environment. Start with [azure-dev versions](https://github.com/Azure/azure-dev/tree/cb28058af1e7139be4381532f6b1167d9cd948fb/templates/common/.devcontainer) and modify as needed.
+- [ ] `README.md` should include architecture diagram. See [README.md#deployment](https://github.com/pamelafox/flask-gallery-container-app#deployment)
+- [ ] `README.md` should use same "Open in " buttons as the TODO samples. See [README.md](https://github.com/Azure/azure-dev/blob/main/templates/todo/projects/python-mongo-swa-func/README.md)
 
 # GitHub project settings
 
@@ -32,6 +33,39 @@ Table of contents:
 - [ ] The project should have a [CODE_OF_CONDUCT.md](https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/CODE_OF_CONDUCT.md)
 - [ ] The project should have a [ISSUE_TEMPLATE.md](https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/ISSUE_TEMPLATE.md)
 - [ ] The project should have a [PULL_REQUEST_TEMPLATE.md](https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
+
+# Python
+
+## Version
+
+- [ ] Use Python 3.11 if possible, otherwise 3.10 if not. 
+- [ ] Don't use features introduced after 3.7.
+- [ ] In `README.md` and elsewhere, use `python3` to run commands.
+    - Instead of `pip install –r requirements.txt`,  use `python3 -m pip install –r requirements.txt` 
+    - The latter is more likely to work in more environments than the former 
+    - Specifying `python3` helps those devs with machines that default to `python2 `
+   
+## Style
+
+- [ ] For variable naming, use [PEP8 conventions](https://pep8.org/#prescriptive-naming-conventions). Don't use the conventions of other languages, like JS/Java.
+- [ ] Use `flake8` or `ruff` with 'E' and 'F' options (default). Warnings related to docstrings can be ignored. Include in `requirements-dev.txt` and configure in [pyproject.toml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/pyproject.toml#L4)
+  - [ ] Run on pre-commit. See [.pre-commit-config.yaml](https://github.com/pamelafox/python-project-template/blob/main/.pre-commit-config.yaml)
+  - [ ] Run in GitHub action. See [python.yaml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/.github/workflows/python.yaml#L23)
+- [ ] Use `isort` or `ruff` with 'I' option. Include in `requirements-dev.txt` and configure in [pyproject.toml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/pyproject.toml#L4)
+  - [ ] Run on pre-commit. See [.pre-commit-config.yaml](https://github.com/pamelafox/python-project-template/blob/main/.pre-commit-config.yaml)
+  - [ ] Run in GitHub action. See [python.yaml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/.github/workflows/python.yaml#L23)
+- [ ] Use `pyupgrade` or `ruff` with `UP` option. Include in `requirements-dev.txt` and configure in [pyproject.toml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/pyproject.toml#L4)
+  - [ ] Run on pre-commit. See [.pre-commit-config.yaml](https://github.com/pamelafox/python-project-template/blob/main/.pre-commit-config.yaml)
+  - [ ] Run in GitHub action. See [python.yaml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/.github/workflows/python.yaml#L23)
+- [ ] Use `black` for formatting, with a reasonable line length (<= 200). Include in `requirements-dev.txt` and configure in [pyproject.toml](https://github.com/pamelafox/python-project-template/blob/127c6bb908e67553f76b11509658b95389ac0342/pyproject.toml#L8)
+- [ ] Avoid ternary operators when possible, as they often lead to unreadable code.
+- [ ] For string formatting, prefer `.format()` when arguments are expressions and f-string for simple variable names. Your code should almost never use string concatenation. Do not use f-strings when logging.
+
+
+## Monitoring
+
+- [ ] Use either OpenCensus or OpenTelemetry so that traces and logs are fully available in Azure Monitor.
+- [ ] Prefer using `logging` or `logger` calls (framework-dependant) instead of `print()`. General guidance is to use` print()` for scripts, logging for web apps. The log level defaults to warning in production (generally), so `logging.info()` statements won’t show up in logs unless the app logger is configured otherwise. 
 
 # Testing
 
@@ -74,6 +108,9 @@ You can choose to either generate requirements files using pip-tools with .in fi
 
 - [ ] CI/CI runs security-devops-action on templates and either breaks build for errors or uploads alerts. See [azure-dev-validate.yaml](https://github.com/tonybaloney/django-on-azure/blob/main/.github/workflows/azure-dev-validate.yml)
 - [ ] README includes section about security, acknowledging any drawbacks to default infra and including recommendations, especially in regards to database username/passwords. See [README.md#security](https://github.com/pamelafox/django-quiz-app#security)
+- [ ] Secrets should *not* be hardcoded in checked-in files.
+    - Try to use environment variables with either a .env file or export commands. 
+    - If using a .env file, provide .env.sample and a .gitignore that has .env already in it. 
 
 ## Database access
 
