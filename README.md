@@ -31,7 +31,7 @@ Table of contents:
 - [ ] The project should have Discussions enabled to lower barrier to engagement. (Settings > General > Features)
 - [ ] The project should have all Dependabot features enabled (Settings > Code Security and Analysis > Dependabot)
 - [ ] The project should have a [CODE_OF_CONDUCT.md](https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/CODE_OF_CONDUCT.md)
-- [ ] The project should have a [ISSUE_TEMPLATE.md](https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/ISSUE_TEMPLATE.md)
+- [ ] The project should have a [ISSUE_TEMPLATE directory]([https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/ISSUE_TEMPLATE.md](https://github.com/pamelafox/flask-db-quiz-example/tree/main/.github/ISSUE_TEMPLATE))
 - [ ] The project should have a [PULL_REQUEST_TEMPLATE.md](https://github.com/pamelafox/flask-surveys-container-app/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
 
 # Python
