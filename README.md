@@ -123,7 +123,8 @@ You can choose to either generate requirements files using pip-tools with .in fi
 Most samples should include VNet integration, but some may choose to not use a VNet for cost or complexity reasons. Much care must be taken in that case, but even with a VNet, best practices around usernames/passwords should be followed.
 
 - [ ] Username should be somewhat randomly generated. Note that [azure-dev issue #1939](https://github.com/Azure/azure-dev/issues/1939) prevents using a completely random username, but uniqueString() function can be used instead. See [main.bicep](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.bicep#L36)
-- [ ] Password should be randomly generated using secretOrRandomPassword and stored in Key Vault. See [main.parameters.json](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.parameters.json#L15), [main.bicep](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.bicep#L133)
+- [ ] Password should be randomly generated using secretOrRandomPassword and stored in Key Vault. See [main.parameters.json](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.parameters.json#L15)
+- [ ] Password should be stored in Key Vault. See [main.bicep](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.bicep#L133)
 - [ ] If using App Service, username and password should be referenced using secret refs, not stored directly in environment variables. See [main.bicep:DBPASS](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.bicep#L80)
 - [ ] If using Container Apps, username and password should be retrieved using the Key Vault SDK. See [production.py](https://github.com/pamelafox/flask-surveys-container-app/blob/main/src/backend/settings/production.py)
 
