@@ -12,6 +12,9 @@ Table of contents:
 
 - [ ] Bicep files should be formatted with `bicep format`. Can possibly be automated with [pre-commit](https://github.com/Azure4DevOps/check-azure-bicep) or [GitHub actions](https://github.com/pamelafox/django-quiz-app/pull/15/files#diff-8af3e80c405f1ab691b04ee13deecae46a34d6e87cc81b9a5f21490bc17e2609R29).
 - [ ] `main.bicep` should reference modules from `core`, copied from [azure-dev](https://github.com/Azure/azure-dev/tree/main/templates/common/infra/bicep).
+
+     ```cp -r ../azure-dev/templates/common/infra/bicep/core/* infra/core/.```
+     
 - [ ] Resources should include a dashboard so that `azd monitor` works, either by referencing the `monitoring.bicep` module or creating a dashboard separately. See [main.bicep](https://github.com/pamelafox/staticmaps-function/blob/ae6fa56af04787df13c124f3500ba143b418e4de/infra/main.bicep#L24)
     - [ ] Application code should include either OpenCensus or OpenTelemetry so that the monitor is populated. See [todo/app.py](https://github.com/Azure/azure-dev/blob/cb28058af1e7139be4381532f6b1167d9cd948fb/templates/todo/api/python/todo/app.py#L48).
 
@@ -139,11 +142,6 @@ Both Django and Flask have a SECRET_KEY setting used for cryptographic signing.
 - [ ] SECRET_KEY must be generated and stored in Key Vault. See [main.parameters.json](https://github.com/pamelafox/flask-surveys-container-app/blob/69a459dad573745202c790b296b51cb5a49fe7a8/infra/main.parameters.json), [main.bicep](https://github.com/pamelafox/flask-surveys-container-app/blob/69a459dad573745202c790b296b51cb5a49fe7a8/infra/main.bicep#L124)
 - [ ] SECRET_KEY should *not* have a default value in production settings.
 
-## Django admin
-
-- [ ] The admin URL should either be disabled or be randomly generated, to prevent drive-by Django admin login attempts. See [main.bicep:ADMIN_URL](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.bicep#L76) and [production.py:ADMIN_URL](https://github.com/pamelafox/django-quiz-app/blob/main/quizsite/production.py#L9)
-
-
 # Package-specific
 
 ## GUnicorn
@@ -158,3 +156,7 @@ Both Django and Flask have a SECRET_KEY setting used for cryptographic signing.
 - [ ] The README command for running the local server should include `--debug`. See [README#local-dev](https://github.com/pamelafox/simple-flask-server-example#local-development)
 - [ ] The README command for running the local server should include `--port=50505` (to avoid collisions with built-in Mac application). See [README#local-dev](https://github.com/pamelafox/simple-flask-server-example#local-development)
 - [ ] The devcontainer.json should expose ports 5000 and 50505. See [devcontainer.json](https://github.com/pamelafox/simple-flask-api-azure-function/blob/ea332d8a2d0b4e36a967af009c4591a261f15bc7/.devcontainer/devcontainer.json#L31)
+
+## Django
+
+- [ ] The admin URL should either be disabled or be randomly generated, to prevent drive-by Django admin login attempts. See [main.bicep:ADMIN_URL](https://github.com/pamelafox/django-quiz-app/blob/main/infra/main.bicep#L76) and [production.py:ADMIN_URL](https://github.com/pamelafox/django-quiz-app/blob/main/quizsite/production.py#L9)
